@@ -1,0 +1,73 @@
+name: Java Swing CI with MySQL
+
+# Trigger the workflow on pushes to main and pull requests to main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: user_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=30s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java Development Kit (JDK)
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adoptopenjdk'
+
+      # Step 3: Install MySQL client (if needed for testing connection)
+      - name: Install MySQL client
+        run: sudo apt-get install mysql-client
+
+      # Step 4: Build the Java application with Maven or Gradle
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Step 5: Run tests (unit tests and integration tests)
+      - name: Run tests
+        run: mvn test
+
+      # Step 6: (Optional) Package your app into a JAR file
+      - name: Package application
+        run: mvn package
+
+      # Step 7: Run integration tests with MySQL
+      - name: Run integration tests with MySQL
+        run: |
+          echo "Waiting for MySQL to be ready..."
+          sleep 30  # Wait for MySQL to be ready (or use a better method for health check)
+          mvn verify -P integration-tests
+
+    # Secrets can be used for sensitive data like MySQL password and username.
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_password
+      MYSQL_DB: test_db
