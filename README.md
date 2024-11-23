@@ -8,7 +8,6 @@
 - [Known Bugs](#known-bugs)
 - [About the Team](#about-the-team)
 - [Contact Information](#contact-information)
-- [License](#license)
 
 ## About the App
 The SoftEng Health Club is known for its commitment to member satisfaction. It aims to enhance its services with a new membership management system. As the club grows, it seeks to streamline operations and improve communication with its members. This system will help SoftEng efficiently manage memberships, handle renewals, and support better member engagement. With a focus on maintaining its reputation for excellent service. This new system will ensure both staff and members enjoy a smooth experience. The system will be designed to handle various membership durations, notify members of upcoming renewals, and allow for on-the-spot membership renewals and sign-up. Additionally, it will offer tools for the club’s management to monitor member activity and generate reports for operational decisions. The following document outlines the complete design needed to meet these objectives and ensure smooth operation for both members and staff. The SoftEng Health Club's suggested membership management system is made to specifically address the demands of both the club and its customers.  This solution will increase membership satisfaction by emphasizing automation, user experience, and data insights through specialized latent tasks.
