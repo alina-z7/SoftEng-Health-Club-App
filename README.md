@@ -36,4 +36,4 @@ For more details about the project, or to reach out with questions or suggestion
 - **Alina Zacaria** - Tech Lead
 - **Andrew Do** - Developer
 - **Nick Calhoun** - Developer
-- **Jai Fischer** - Developer
+- **Jai Fischer** - Developer 
