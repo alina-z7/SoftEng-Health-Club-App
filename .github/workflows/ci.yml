@@ -13,11 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v2
       
-      # Cache Maven dependencies
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
@@ -26,17 +24,51 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Build with Maven (check for compilation errors)
       - name: Build with Maven
         run: mvn clean install
-      
-      # Run Checkstyle (static code analysis)
+
       - name: Run Checkstyle
         run: mvn checkstyle:check
 
-      # Count Lines of Code using cloc
       - name: Count Lines of Code
         run: |
           sudo apt-get update
           sudo apt-get install -y cloc
           cloc --exclude-dir=target --quiet .  # Exclude 'target' directory to avoid counting compiled files
+
+      # Measure execution time, throughput, error rate, memory usage, and call count
+      - name: Measure Java Application Metrics
+        run: |
+          # Install jq for parsing JSON results
+          sudo apt-get install jq
+
+          # Run tests with metrics (timing, error rate, throughput, etc.)
+          mvn test | tee result.log
+
+          # Extract test execution time
+          test_duration=$(grep "Total time" result.log | sed 's/[^0-9]*\([0-9]*\)[^0-9]*/\1/')
+          echo "Test Execution Time: $test_duration seconds"
+
+          # Extract error rate (failed tests)
+          failed_tests=$(grep -c 'FAILURE' result.log)
+          total_tests=$(grep -c 'Tests run' result.log)
+          error_rate=$(echo "scale=2; $failed_tests / $total_tests * 100" | bc)
+          echo "Error Rate: $error_rate%"
+
+          # Extract throughput (tests per second)
+          throughput=$(echo "scale=2; $total_tests / $test_duration" | bc)
+          echo "Throughput: $throughput tests per second"
+
+          # Measure memory usage with jvm options during test run
+          echo "Memory Usage (heap size):"
+          jps -v | grep 'java'
+
+          # Check method call count (assumes logging for call count)
+          call_count=$(grep -o 'methodCallCount' result.log | wc -l)
+          echo "Call Count: $call_count"
+        
+      - name: Upload test results to GitHub
+        uses: actions/upload-artifact@v2
+        with:
+            name: test-results
+            path: result.log
