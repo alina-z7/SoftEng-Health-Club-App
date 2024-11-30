@@ -1,3 +1,5 @@
+name: Java CI with LOC Counting
+
 on:
   push:
     branches:
@@ -13,7 +15,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
@@ -24,7 +26,7 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-      
+
       - name: Run Checkstyle
         run: mvn checkstyle:check
 
@@ -32,41 +34,48 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cloc
-          cloc --exclude-dir=target --quiet .
+          cloc --exclude-dir=target --quiet .  # Exclude 'target' directory to avoid counting compiled files
 
-      # Measure execution time, throughput, error rate, memory usage, and call count
       - name: Measure Java Application Metrics
         run: |
-          # Install jq for parsing JSON results
-          sudo apt-get install jq
+          # Install jq for parsing JSON results (ensure it's installed)
+          sudo apt-get install -y jq
 
-          # Run tests with metrics (timing, error rate, throughput, etc.)
+          # Run tests and capture the output
           mvn test | tee result.log
 
-          # Extract test execution time
-          test_duration=$(grep "Total time" result.log | sed 's/[^0-9]*\([0-9]*\)[^0-9]*/\1/')
+          # Extract total test execution time in seconds (use the proper regex)
+          test_duration=$(grep -oP 'Total time: \K[0-9.]+' result.log)
           echo "Test Execution Time: $test_duration seconds"
 
           # Extract error rate (failed tests)
           failed_tests=$(grep -c 'FAILURE' result.log)
           total_tests=$(grep -c 'Tests run' result.log)
-          error_rate=$(echo "scale=2; $failed_tests / $total_tests * 100" | bc)
+          if [[ $total_tests -gt 0 ]]; then
+            error_rate=$(echo "scale=2; $failed_tests / $total_tests * 100" | bc)
+          else
+            error_rate=0
+          fi
           echo "Error Rate: $error_rate%"
 
           # Extract throughput (tests per second)
-          throughput=$(echo "scale=2; $total_tests / $test_duration" | bc)
+          if [[ $test_duration > 0 ]]; then
+            throughput=$(echo "scale=2; $total_tests / $test_duration" | bc)
+          else
+            throughput=0
+          fi
           echo "Throughput: $throughput tests per second"
 
-          # Measure memory usage with jvm options during test run
+          # Measure memory usage with JVM options during test run
           echo "Memory Usage (heap size):"
           jps -v | grep 'java'
 
-          # Check method call count (assumes logging for call count)
+          # Check method call count (assuming logging is implemented for call count)
           call_count=$(grep -o 'methodCallCount' result.log | wc -l)
           echo "Call Count: $call_count"
-        
+
       - name: Upload test results to GitHub
         uses: actions/upload-artifact@v3
         with:
-            name: test-results
-            path: result.log
+          name: test-results
+          path: result.log
