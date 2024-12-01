@@ -15,44 +15,11 @@ The SoftEng Health Club is known for its commitment to member satisfaction. It a
 ## Technologies Used
 - **Java**: Primary programming language for backend development.
 - **MySQL**: Database management system for storing and retrieving all membership data.
+- **XML**: Used for defining the GUI layouts of the application.
 
 ## Implementation Details
 
 The SoftEng Health Club Membership Management System comprises several Java classes and interfaces, each responsible for specific functionalities that ensure robust operation and maintainability. Here's an overview of the key components:
-
-### Classes and Components:
-
-1. **`Member.java`**:
-   - Inherits from the `Person` class.
-   - Attributes include `id_number`, `creation_date`, `expiration_date`, and `last_checked_in`.
-   - Methods for setting ID number, creation date, updating check-in times, and expiration dates, which aid in tracking membership validity and usage.
-
-2. **`Person.java`**:
-   - Base class for all person-type entities in the system.
-   - Contains personal information like name, email address, date of birth, and phone number.
-   - Methods to retrieve and update personal information, ensuring encapsulation and data integrity.
-
-3. **`Status.java`**:
-   - An enumeration that defines roles such as `STAFF` and `CLUB_MANAGER`, utilized for role-based access control within the system.
-
-4. **`LoginPage.java`**:
-   - A Java Swing dialog that handles user authentication.
-   - Integrates with the system's backend to validate user credentials against stored data in the MySQL database.
-   - Provides GUI elements for user interaction and input validation.
-
-5. **`jdbcValues.java`**:
-   - An interface that stores JDBC database connection parameters such as DB URL, username, and password, centralizing the database configuration for easy management.
-
-6. **`LoginPage.form`**:
-   - An XML configuration for designing the GUI layout of the login page, specifying grid layouts, fonts, and other UI components.
-
-7. **`SoftEngHealthClubSystem.java`**:
-   - The main driver class that initiates the application.
-   - Handles session management post-login, displaying the home page and passing user details throughout the system.
-
-8. **`LogIn.java`**:
-   - Facilitates the interaction with the `LoginPage` class.
-   - Handles the outcome of the authentication process, either logging the user in or handling login failures.
 
 ### Database Integration:
 
