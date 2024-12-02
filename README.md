@@ -36,7 +36,8 @@ The SoftEng Health Club Membership Management System comprises several Java clas
 [To be completed]
 
 ## Known Bugs
-[To be noted]
+- **Selection Issue After Sorting**: Selecting a member after sorting the table by column selects the member that was in the row before sorting. This can lead to incorrect member actions and needs attention to ensure accurate data manipulation.
+- **Array Out of Bounds Error**: An array out of bounds error occurs when the delete button is clicked without selecting a member. This error can crash the application, leading to potential data loss and reduced system stability.
 
 ## About the Team
 This project is developed by a dedicated team of software engineering students from the COMP330 course. The team has embraced the challenge of developing a robust membership management system and has shown exceptional commitment to continuous improvement and clear communication.
