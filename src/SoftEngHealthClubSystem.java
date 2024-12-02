@@ -1,3 +1,7 @@
+import Pages.HealthClubHomePage;
+import Entities.*;
+import javax.swing.*;
+
 public class SoftEngHealthClubSystem {
 
     public Guest user;

@@ -1,10 +1,13 @@
+package Pages;
+
+import Entities.Guest;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class LoginPage extends JDialog implements jdbcValues{
+public class LoginPage extends JDialog implements jdbcValues {
     private JFormattedTextField ftfUserId;
     private JPasswordField pfPassword;
     private JButton loginButton;
@@ -50,7 +53,7 @@ public class LoginPage extends JDialog implements jdbcValues{
     private Guest getAuthenticatedGuest(long id, String password){
         Guest guest = null;
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             Statement stmt = conn.createStatement();
             String query = "SELECT * FROM employees WHERE user_id=? AND password=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);

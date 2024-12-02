@@ -1,6 +1,7 @@
+package Pages;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileView;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
@@ -91,7 +92,7 @@ public class InactiveMemberList extends JDialog implements jdbcValues{
         FileNameExtensionFilter f = new FileNameExtensionFilter("Text Files", "txt");
         jfc.setFileFilter(f);
 
-        File defaultFile = new File("InactiveMemberList.txt");
+        File defaultFile = new File("Pages.InactiveMemberList.txt");
         jfc.setSelectedFile(defaultFile);
 
         // Set file selection mode to display both files and directories

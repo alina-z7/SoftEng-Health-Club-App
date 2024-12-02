@@ -1,3 +1,6 @@
+import Pages.LoginPage;
+
+import Entities.Guest;
 import javax.swing.*;
 
 public class LogIn {

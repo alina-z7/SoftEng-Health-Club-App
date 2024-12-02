@@ -1,4 +1,6 @@
+package Entities;
 import java.time.LocalDate;
+
 public class Guest extends Person {
 
     public long id_number;

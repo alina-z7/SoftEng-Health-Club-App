@@ -1,3 +1,6 @@
+package Pages;
+
+import Entities.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,7 +16,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Vector;
 
-public class HealthClubHomePage extends JFrame implements jdbcValues{
+public class HealthClubHomePage extends JFrame implements jdbcValues {
 
     final Vector<String> cols = new Vector<>(Arrays.asList("ID", "First Name", "Last Name", "Birthday", "Email", "Phone Number"));
     private Guest user;
@@ -165,7 +168,9 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
                             "\n\tBirthday: " + member.date_of_birth, "Confirm Deletion", JOptionPane.YES_NO_OPTION);
 
                     switch (result) {
-                        case JOptionPane.NO_OPTION -> JOptionPane.showMessageDialog(HealthClubHomePage.this, "Deletion was unsuccessful", "Member Deletion", JOptionPane.INFORMATION_MESSAGE);
+                        case JOptionPane.NO_OPTION -> {
+                            JOptionPane.showMessageDialog(HealthClubHomePage.this, "Deletion was unsuccessful", "Member Deletion", JOptionPane.INFORMATION_MESSAGE);
+                        }
                         case JOptionPane.YES_OPTION -> {
                             boolean deleted = deleteMember(member.id_number);
                             JOptionPane.showMessageDialog(HealthClubHomePage.this,
@@ -194,7 +199,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public void initializeTable(){
         Vector<Vector<Object>> data = new Vector<>();
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             Statement stmt = conn.createStatement();
             String query = "SELECT id_number, first_name, last_name, birth_date, email_address, phone_number FROM members";
             ResultSet rs = stmt.executeQuery(query);
@@ -231,7 +236,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public void searchTable(Member member) {
         Vector<Vector<Object>> data = new Vector<>();
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             String query = "SELECT id_number, first_name, last_name, birth_date, email_address, phone_number " +
                     "FROM members " +
                     "WHERE id_number LIKE ? " +
@@ -269,7 +274,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public Member getMember(long id) {
         Member member = null;
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             String query = "SELECT * FROM members WHERE id_number=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setLong(1,id);
@@ -298,7 +303,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public boolean deleteMember(long id) {
         boolean deleted = false;
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             String query = "DELETE FROM members WHERE id_number=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setLong(1,id);
@@ -315,7 +320,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public boolean renewMembership(long id, int md){
         boolean renewed = false;
         try {
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             String query = "UPDATE members SET expiration_date = DATE_ADD(expiration_date, INTERVAL ? MONTH) , last_checked_in_date = ? WHERE id_number = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, md);
@@ -333,7 +338,7 @@ public class HealthClubHomePage extends JFrame implements jdbcValues{
     public boolean updateMembership(Member member) {
         boolean updated = false;
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
             String query = "UPDATE members SET first_name=?, last_name=?, email_address=?, phone_number=? WHERE id_number=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1,member.first_name);

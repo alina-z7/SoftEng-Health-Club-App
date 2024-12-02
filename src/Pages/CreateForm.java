@@ -1,3 +1,6 @@
+package Pages;
+
+import Entities.Member;
 
 import javax.swing.*;
 import java.awt.*;
