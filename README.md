@@ -4,7 +4,6 @@
 - [About the App](#about-the-app)
 - [Technologies Used](#technologies-used)
 - [Implementation Details](#implementation-details)
-- [Testing Details](#testing-details)
 - [Known Bugs](#known-bugs)
 - [About the Team](#about-the-team)
 - [Contact Information](#contact-information)
@@ -31,9 +30,6 @@ The SoftEng Health Club Membership Management System comprises several Java clas
 - Designed using Java Swing, providing a native look and feel that is familiar to users.
 - The login page is created with a combination of labels, text fields, and buttons laid out using a `GridLayoutManager` to ensure a responsive layout across different screen resolutions.
 
-
-## Testing Details
-[To be completed]
 
 ## Known Bugs
 - **Selection Issue After Sorting**: Selecting a member after sorting the table by column selects the member that was in the row before sorting. This can lead to incorrect member actions and needs attention to ensure accurate data manipulation.
