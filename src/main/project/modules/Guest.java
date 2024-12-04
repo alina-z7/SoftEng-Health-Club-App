@@ -1,4 +1,4 @@
-package Entities;
+package main.project.modules;
 import java.time.LocalDate;
 
 public class Guest extends Person {

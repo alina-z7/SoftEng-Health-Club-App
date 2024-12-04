@@ -1,6 +1,6 @@
-package Pages;
+package main.project.pages;
 
-import Entities.Guest;
+import main.project.modules.Guest;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,9 @@
-package Pages;
+package main.project.pages;
 
-import Entities.*;
+import main.project.modules.Guest;
+import main.project.modules.Member;
+import main.project.modules.Status;
+import modules.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

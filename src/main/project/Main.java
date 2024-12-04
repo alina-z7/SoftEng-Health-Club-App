@@ -1,4 +1,6 @@
-import Entities.*;
+package main.project;
+
+import main.project.modules.Guest;
 
 public class Main {
     public static void main(String[] args) {

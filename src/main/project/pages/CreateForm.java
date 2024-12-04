@@ -1,6 +1,6 @@
-package Pages;
+package main.project.pages;
 
-import Entities.Member;
+import main.project.modules.Member;
 
 import javax.swing.*;
 import java.awt.*;

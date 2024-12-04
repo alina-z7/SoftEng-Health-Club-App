@@ -1,5 +1,8 @@
-import Pages.HealthClubHomePage;
-import Entities.*;
+package main.project;
+
+import main.project.modules.Guest;
+import main.project.pages.HealthClubHomePage;
+
 import javax.swing.*;
 
 public class SoftEngHealthClubSystem {

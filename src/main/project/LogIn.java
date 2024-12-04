@@ -1,6 +1,8 @@
-import Pages.LoginPage;
+package main.project;
 
-import Entities.Guest;
+import main.project.pages.LoginPage;
+
+import main.project.modules.Guest;
 import javax.swing.*;
 
 public class LogIn {

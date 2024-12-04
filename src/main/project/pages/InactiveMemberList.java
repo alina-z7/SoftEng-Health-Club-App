@@ -1,4 +1,4 @@
-package Pages;
+package main.project.pages;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
