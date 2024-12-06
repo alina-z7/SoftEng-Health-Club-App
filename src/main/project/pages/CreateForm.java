@@ -110,18 +110,57 @@ public class CreateForm extends JDialog implements jdbcValues{
 
     public Long createUniqueID(Connection conn) {
         long id = 10000000000L;
-        try{
-            while(true){
+        try {
+            while (true) {
                 String query = "SELECT * FROM members WHERE id_number=?";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setLong(1, id);
                 ResultSet rs = preparedStatement.executeQuery();
-                if(!rs.next()) break;
-                else id = (long)(Math.random() * (99999999999L - 10000000000L)) + 10000000000L;
+                if (!rs.next()) break;
+                else id = (long) (Math.random() * (99999999999L - 10000000000L)) + 10000000000L;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return id;
+    }
+
+
+
+// Implement the getter methods
+    public JTextField getFirstNameField() {
+        return tfFirstName;
+    }
+
+    public JTextField getLastNameField() {
+        return tfLastName;
+    }
+
+    public JTextField getEmailField() {
+        return tfEmail;
+    }
+
+    public JTextField getPhoneNumberField() {
+        return tfPhoneNumber;
+    }
+
+    public JTextField getBdMonthField() {
+        return bdMonth;
+    }
+
+    public JTextField getBdDayField() {
+        return bdDay;
+    }
+
+    public JTextField getBdYearField() {
+        return bdYear;
+    }
+
+    public JTextField getMembershipDurationField() {
+        return MembershipDuration;
+    }
+
+    public JButton getCreateButton() {
+        return createButton;
     }
 }
