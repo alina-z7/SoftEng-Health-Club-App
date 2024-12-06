@@ -1,5 +1,6 @@
 package main.project.pages;
 
+import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import main.project.modules.Guest;
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class LoginPage extends JDialog implements jdbcValues {
 
 
 
-    private Guest getAuthenticatedGuest(long id, String password){
+    public Guest getAuthenticatedGuest(long id, String password){
         Guest guest = null;
         try{
             Connection conn = DriverManager.getConnection(jdbcValues.DB_URL, jdbcValues.DB_USERNAME, jdbcValues.DB_PASSWORD);
@@ -77,6 +78,23 @@ public class LoginPage extends JDialog implements jdbcValues {
         }
 
         return guest;
+    }
+
+    public AbstractButton getLoginButton() {
+        return cancelButton;
+    }
+
+    public JPasswordField getPasswordField() {
+        return pfPassword;
+    }
+
+    public JFormattedTextField getFtfUserId() {
+        return ftfUserId;
+
+    }
+
+    public Object getCancelButton() {
+        return cancelButton;
     }
 }
 

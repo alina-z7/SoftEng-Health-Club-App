@@ -22,8 +22,8 @@ public class InactiveMemberList extends JDialog implements jdbcValues{
 
     final Vector<String> cols = new Vector<>(Arrays.asList("ID", "First Name", "Last Name", "Birthday", "Email", "Phone Number", "Creation Date", "Expiration Date", "Last Checked In"));
 
-    private JTable inactiveMemberTable;
-    private JButton downloadButton;
+    public JTable inactiveMemberTable;
+    public JButton downloadButton;
     public JLabel welcome;
     private JPanel InactiveMemberListPanel;
 
