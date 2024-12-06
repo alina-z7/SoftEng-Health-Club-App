@@ -66,7 +66,7 @@ public class CreateForm extends JDialog implements jdbcValues{
 
     public long createMember(Member m, int md) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            Connection conn = DriverManager.getConnection(.DB_URL, DB_USERNAME, DB_PASSWORD);
             switch (checkIfMemberExists(m, conn)) {
                 case 1 -> throw new Exception("Email Already Exists In System");
                 case 2 -> throw new Exception("Phone Number Already Exists In System");
